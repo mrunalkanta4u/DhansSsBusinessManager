@@ -1,0 +1,180 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Main"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!--<local:ScenarioBindingConverter x:Key="ScenarioConverter"></local:ScenarioBindingConverter>-->
+        <DataTemplate x:Key="ScenarioItemTemplate" x:DataType="local:Scenario">
+            <StackPanel Orientation="Horizontal"  Margin="2,0,0,0">
+                <SymbolIcon Symbol="{x:Bind Symbol}"/>
+                <TextBlock Text="{x:Bind Title}" Margin="24,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
+                Click="ShowSliptView"/>
+        <SplitView x:Name="Splitter" IsPaneOpen="True" Grid.Column="1" DisplayMode="Inline" Grid.Row="1" OpenPaneLength="342">
+            <SplitView.Pane>
+                <RelativePanel Margin="10,10,10,10">
+                    <TextBlock x:Name="SampleTitle" Text="Sample Title Here" Style="{StaticResource SampleHeaderTextStyle}" TextWrapping="Wrap" Margin="15,10,10,10" Tapped="OnTitleTapped"/>
+                    <Border BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" Width="Auto" Height="2"  HorizontalAlignment="Stretch" Margin="15,-240,-308,-345"/> <!--RelativePanel.Below="SampleTitle"/>-->
+
+                    <!--<ListBox x:Name="ScenarioControl" SelectionChanged="ScenarioControl_SelectionChanged"
+                 SelectionMode="Single" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0"
+                 VerticalAlignment="Top" RelativePanel.Below="SampleTitle" Margin="0,10,0,0" RelativePanel.Above="FooterPanel">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource ScenarioConverter}}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>-->
+                    <!--<Grid>-->
+                    <!--<Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>-->
+                    <!--<TextBlock Text="PANE CONTENT" x:Name="PaneHeader" Margin="60,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>-->
+
+                    <ListView x:Name="ScenarioControl" Margin="10,10,10,10" SelectionMode="Single" Grid.Row="1" VerticalAlignment="Stretch"  IsItemClickEnabled="True" 
+                            ItemsSource="{x:Bind Scenarios}" ItemTemplate="{StaticResource ScenarioItemTemplate}"
+                            SelectionChanged="ScenarioControl_SelectionChanged"
+                            HorizontalAlignment="Left" Background="Transparent" BorderThickness="0"
+                            RelativePanel.Below="SampleTitle"  RelativePanel.Above="FooterPanel" Width="312"/>
+                    <!--<Rectangle HorizontalAlignment="Stretch" Fill="gray" Height="40" Margin="4,0"/>-->
+                    <!--<StackPanel x:Name="ExitPannel" Orientation="Horizontal" Grid.Row="2" Margin="25,-50,10,10" RelativePanel.Below="ScenarioControl">
+                        --><!--<Rectangle HorizontalAlignment="Stretch" Fill="Blue" Height="4" Margin="4,0"/>--><!--
+                        <SymbolIcon Symbol="Clear" Tapped="OnExitTapped"/>
+                        <TextBlock Text="Exit" Margin="10,10,10,10" VerticalAlignment="Center" Tapped="OnExitTapped"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="25,-140,10,10" RelativePanel.Above="ExitPannel">
+                        <SymbolIcon Symbol="Setting" Tapped="OnExitTapped"/>
+                        <TextBlock Text="Setting" Margin="10,10,10,10" VerticalAlignment="Center" Tapped="OnExitTapped"/>
+                    </StackPanel>-->
+                    <!--<Border BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" Width="Auto" HorizontalAlignment="Stretch" Margin="15,350,-310,-345"/>-->
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="25,-50,10,10" RelativePanel.Below="ScenarioControl">
+                        <SymbolIcon Symbol="Setting" Tapped="OnSettingTapped"/>
+                        <TextBlock Text="Setting" Margin="10,10,10,10" VerticalAlignment="Center" Tapped="OnSettingTapped"/>
+                    </StackPanel>
+                    <!--</Grid>-->
+                    <StackPanel x:Name="FooterPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True">
+                        <!--<Image Source="media/microsoft-sdk.png" AutomationProperties.Name="DhansSs Business Manager Logo" Stretch="None" HorizontalAlignment="Right" Margin="0,0,148,0"/>-->
+                        <TextBlock x:Name="Copyright" Text="&#xA9; Mrunal Kanta Muduli." Style="{StaticResource CopyrightTextStyle}"
+                                   RelativePanel.Above="LinksPanel" Margin="10,10,0,0"
+                                   TextWrapping="Wrap"/>
+                        <StackPanel x:Name="LinksPanel" Orientation="Horizontal" Margin="10,10,0,10">
+                            <HyperlinkButton Content="Trademarks" Tag="http://go.microsoft.com/fwlink/?LinkID=623755"
+                        Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}" />
+                            <TextBlock Text="|"  Style="{StaticResource SeparatorStyle}" VerticalAlignment="Center" />
+                            <HyperlinkButton x:Name="PrivacyLink" Content="Privacy" Tag="http://privacy.microsoft.com" Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </RelativePanel>
+            </SplitView.Pane>
+            <RelativePanel>
+                <Frame x:Name="ScenarioFrame" Margin="0,5,0,0" RelativePanel.AlignTopWithPanel="True" RelativePanel.Above="StatusPanel" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                
+                <!--<StackPanel x:Name="StatusPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" Margin="0,-60,0,60">
+                    <StackPanel.Resources>
+
+                        <Storyboard x:Name="EnterStoryboard">
+                            --><!--<FadeOutThemeAnimation Storyboard.TargetName="StatusBorder" />--><!--
+                            <DoubleAnimation From="1"  Storyboard.TargetProperty="Opacity" 
+                                 Storyboard.TargetName="StatusPanel" To="0" Duration="0:0:10">
+                                --><!--RepeatBehavior="Forever" AutoReverse="False"--><!--
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                        --><!--<Storyboard x:Name="ExitStoryboard">
+                            <SwipeBackThemeAnimation Storyboard.TargetName="StatusBorder" />
+                        </Storyboard>-->
+                        <!--<Storyboard x:Key="FadeStoryboard">
+                            <DoubleAnimation From="1" To="0.1" Storyboard.TargetProperty="Opacity" 
+                                 Storyboard.TargetName="StatusBorder" 
+                                 RepeatBehavior="Forever" AutoReverse="True">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>--><!--
+                    </StackPanel.Resources>
+                    <Border  x:Name="StatusBorder" Padding="2"
+                               PointerEntered="Rectangle_PointerEntered" 
+                               PointerExited="Rectangle_PointerExited"   
+                               Tapped="StatusBorder_LostFocus"
+                               Width="300" Height="50" Margin="10,10,10,10"  Background="Transparent">
+                        --><!--<ScrollViewer VerticalScrollMode="Auto"  VerticalScrollBarVisibility="Auto" MaxHeight="80">--><!--
+                        <ScrollViewer MaxHeight="80" Background="Transparent">
+                            <TextBlock x:Name="StatusBlock" FontWeight="Bold" 
+                                   MaxWidth="{Binding ElementName=Splitter, Path=ActualWidth}" Margin="10,10,10,20" TextWrapping="Wrap"  />
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>-->
+
+                <StackPanel x:Name="StatusPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" Margin="0,-130,0,60">
+                    <Border  x:Name="StatusBorder" Padding="2" Tapped="StatusBorder_LostFocus"
+                               Width="300" Height="50" Margin="0,0,0,0"  Background="Transparent">
+                        <Border.Resources>
+                            <Storyboard x:Name="EnterStoryboard">
+                                <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" 
+                                 Storyboard.TargetName="StatusPanel" Duration="0:0:10">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Border.Resources>
+                        <ScrollViewer MaxHeight="80" Background="Transparent">
+                            <TextBlock x:Name="StatusBlock" FontWeight="Bold" 
+                                   MaxWidth="{Binding ElementName=Splitter, Path=ActualWidth}" Margin="0,0,0,0" TextWrapping="Wrap"  />
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+                
+            </RelativePanel>
+        </SplitView>
+
+        <StackPanel x:Name="HeaderPanel" Orientation="Horizontal">
+            <Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Grid.Row="0">
+                <ToggleButton Style="{StaticResource SymbolButton}" Click="Button_Click" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
+                    <ToggleButton.Content>
+                        <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+            </Border>
+            <!--<Image x:Name="DhansSsBizMgrLogo" Stretch="None" Source="media/Manager.png" Margin="10,10,0,0" />-->
+            <Image x:Name="DhansSsBizMgrLogo" Stretch="None" Source="media/DhansSsBizMgr.png" Margin="10,7,0,3" />
+            <TextBlock x:Name="Header" Text="DhansSs Business Manager" Style="{StaticResource TagLineTextStyle}" Margin="5,15,0,0" Tapped="OnTitleTapped"/>
+        </StackPanel>
+
+        <local:SamplesPane x:Name="MySamplesPane" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+    </Grid>
+</Page>

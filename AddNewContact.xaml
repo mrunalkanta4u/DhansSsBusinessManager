@@ -1,0 +1,98 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.AddNewContact"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xamlcrop="using:XamlCropControl"
+    xmlns:controls="using:U2UConsult.WinRT.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                <Grid>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock x:Name="TiteOfPage" Text="Add New Contact" Style="{StaticResource SampleHeaderTextStyle}"/>
+                        <!--<Border Grid.Row="1" BorderBrush="Red" BorderThickness="1">
+                            <xamlcrop:CropControl x:Name="Crop" ImageSource="ms-appx:///Assets/wrench.jpg" DesiredAspectRatio="1.0" />
+                        </Border>-->
+                        <StackPanel ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Auto">
+                            <!--Fill="LightGray"-->
+                            <Ellipse x:Name="PhotoEllipse"
+                		    Width ="85"
+                		    Height="85"
+                		    Margin="0,6,0,0"
+                		    VerticalAlignment="Center"
+                		    HorizontalAlignment="Left"
+                		    Tapped="Ellipse_Tapped">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets/Account.png" ImageOpened="ImageBrush_ImageOpened" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                           <!--<controls:ImageCropper x:Name="ImageCropper"
+                                   VerticalAlignment="Stretch"
+                                   HorizontalAlignment="Stretch" />
+
+                            <Grid 
+                              Background="{StaticResource ApplicationSecondaryForegroundThemeBrush}"
+                              Opacity="0.8" >
+
+                            <Image Source="Assets/Account.png" />
+                            </Grid>-->
+
+                            <!--Source="{Binding CroppedImage, ElementName=ImageCropper}" />-->
+                            <TextBlock Text="Name" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="NameTextBox"  PlaceholderText="Enter Full Name of Prospect" InputScope="PersonalFullName" TextChanging="OnTextChanging"/>
+                            <TextBlock Text="PhoneNumber" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="PhoneNumberTextBox" PlaceholderText="Enter Contact number of Prospect" InputScope="TelephoneNumber"/>
+                            <TextBlock Text="Location" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="LocationTextBox" PlaceholderText="Enter Location of Prospect" InputScope="Maps" />
+                            <TextBlock Text="Category" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+                            <ComboBox x:Name="CategoryComboBox" >
+                                <!--Loaded="CategoryComboBox_Loaded">-->
+                                <!--<x:String>Hot</x:String>
+                                <x:String>Oye Buddy</x:String>
+                                <x:String>Warm</x:String>
+                                <x:String>Cold</x:String>-->
+                                <ComboBoxItem Content="Hot"/>
+                                <ComboBoxItem Content="Oye Buddy"/>
+                                <ComboBoxItem Content="Warm" IsSelected="True"/>
+                                <ComboBoxItem Content="Cold"/>
+                                <!--<ComboBoxItem Content="Hot" Name="HT"/>
+                                <ComboBoxItem Content="Oye Buddy" Name="OB"/>
+                                <ComboBoxItem Content="Warm" Name="WM"/>
+                                <ComboBoxItem Content="Cold" Name="CD"/>-->
+                            </ComboBox>
+                            <TextBlock Text="Remark"/>
+                            <TextBox x:Name="RemarkTextBox" Height="60" PlaceholderText="Enter Details about Prospect" AcceptsReturn="True" IsSpellCheckEnabled="True" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar HorizontalContentAlignment="Right" Background="Transparent">
+            <AppBarButton x:Name="SaveItemBtn" Label="Save" Icon="Save" Click="SaveItem" />
+            <AppBarButton x:Name="CancelSaveBtn" Label="Cancel" Icon="Cancel" Click="CancelSave" />
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
+

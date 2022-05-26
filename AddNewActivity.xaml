@@ -1,0 +1,93 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.AddNewActivity"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  Grid.Row="1"  VerticalScrollBarVisibility="Hidden">
+                <Grid>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="New Activity" Style="{StaticResource SampleHeaderTextStyle}"/>
+                        <StackPanel ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Auto">
+                            <TextBlock Text="Prospect Name" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+                            <!--<ComboBox x:Name="ProspectNameComboBox"
+                                  Margin="0,0,0,4" 
+                                  IsEditable="True"                      
+                                  Grid.Column="1" 
+                                  Grid.ColumnSpan="2"
+                                  Grid.Row="4" 
+                                  SelectedValuePath="Id" 
+                                  DisplayMemberPath="Service" 
+                                  SelectedValue="{Binding Controller.Service1}" 
+                                  ItemsSource="{Binding}" 
+                                  Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                            
+                                <!--<i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewTextInput">
+                                        <cmd:EventToCommand Command="{Binding TextInputCommand}"  PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                </Combobox>-->
+                            <!--<ComboBox  x:Name="ProspectNameComboBox" ItemsSource="{Binding}" DisplayMemberPath="Name" PlaceholderText="Prospect name" Visibility="Collapsed">
+                                --><!--<ComboBoxItem>
+                                    <TextBox Text="something"/>
+                                </ComboBoxItem>--><!--
+                            </ComboBox>-->
+                            <!--<control:SearchableComboBox Margin='5'
+          x:Name='ComboBoxCountry'
+          ItemsSourceList='{Binding CountryList}'
+          ItemsSourceListBase='{Binding CountryListBase}'
+          PlaceholderText='Select Country'/>-->
+                            <AutoSuggestBox x:Name="ProspectNameAutoSuggestBox"  DisplayMemberPath="Name" 
+                                            TextChanged="asugbox_TextChanged" QuerySubmitted="asugbox_QuerySubmitted"
+                                            SuggestionChosen="asugbox_SuggestionChosen" PlaceholderText="Select the prospect name"
+                                            KeyDown="ProspectNameAutoSuggestBox_KeyDown" KeyUp="ProspectNameAutoSuggestBox_KeyUp" />
+                            <TextBlock Text="Date Of Call" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+                            <CalendarDatePicker  x:Name="DateOfCall" DateFormat="{}{day.integer} {month.full} {year.full}"/>
+                            <TextBlock Text="Type Of Call" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+                            <ComboBox  x:Name="TypeOfCallComboBox" >
+                                <ComboBoxItem Content="Connect Up" IsSelected="True"></ComboBoxItem>
+                                <ComboBoxItem Content="Prospecting"></ComboBoxItem>
+                                <ComboBoxItem Content="Info"></ComboBoxItem>
+                                <ComboBoxItem Content="Invite"></ComboBoxItem>
+                                <ComboBoxItem Content="Closing"></ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock Text="Remark"/>
+                            <TextBox x:Name="RemarkTextBox" Height="80" PlaceholderText="Enter Details about Prospect" AcceptsReturn="True" IsSpellCheckEnabled="True" TextWrapping="Wrap" />
+                            <!--TextBlock Text="Status" x:Name="status"/-->
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar HorizontalContentAlignment="Right" Background="Transparent">
+            <!--ClosedDisplayMode="Minimal"-->
+            <AppBarButton x:Name="SaveItemBtn" Label="Save" Icon="Save" Click="SaveItem" />
+            <AppBarButton x:Name="CancelSaveBtn" Label="Cancel" Icon="Cancel" Click="CancelSave" />
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
+

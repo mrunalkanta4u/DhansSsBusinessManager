@@ -1,0 +1,436 @@
+﻿<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+     x:Class="SDKTemplate.DreamList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    xmlns:data="using:SDKTemplate.Model"
+    NavigationCacheMode="Enabled"    
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Page.BottomAppBar>
+        <CommandBar HorizontalContentAlignment="Right" Background="Transparent">
+            <AppBarButton x:Name="AddItemBtn" Label="Add Item" Icon="Add" Click="AddItem" />
+            <AppBarButton x:Name="SelectItmesBtn" FontFamily="OverflowCheckGlyph" Label="Select Items" Click="SelectItems">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xe762;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Name="EditItemBtn" Label="Edit Item" Icon="Edit" Click="EditItem" />
+            <AppBarButton x:Name="DeleteItemBtn" Label="Delete Item" Icon="Delete" Click="DeleteItem" />
+            <AppBarButton x:Name="DeleteItemsBtn" Label="Delete Items" Icon="Delete" Click="DeleteItems" />
+            <AppBarButton x:Name="CancelSelectionBtn" Label="Cancel" Icon="Cancel" Click="CancelSelection" />
+            <!--"SearchButton_Click" /-->
+
+
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Page.Resources>
+
+        <!--<CollectionViewSource x:Name="cvsGroups" Source="{x:Bind Dream}" IsSourceGrouped="false" grou ItemsPath="Items"/>
+                              --><!--d:Source="{Binding Groups, Source={d:DesignData Source=/DataModel/ControlInfoData.json, Type=data:Dream}}"/>--><!--
+
+        <DataTemplate x:Key="ZoomedInTemplate" x:DataType="data:Dream">
+            <StackPanel Orientation="Horizontal" MinWidth="200" Margin="12,6,0,6">
+                <TextBlock x:Name="IdLabel"
+                                   Margin="0,12,5,12" 
+                                   Style="{ThemeResource SubtitleTextBlockStyle}"
+                                   Text="{x:Bind DreamName}"/>
+                <TextBlock  Text="{x:Bind TatgetDate}" 
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Foreground="{ThemeResource SystemBaseMediumColor}"
+                            Margin="0,38,5,12"/>
+                <Image RelativePanel.Below="IdLabel"
+                                   Source="{x:Bind Photo}" 
+                                   MaxWidth="300"
+                                   Stretch="Uniform"
+                                   Margin="0,15,0,24" />
+                --><!--<Image Source="{x:Bind Photo}" Height="80" Width="80"/>
+                <StackPanel Margin="20,0,0,0">
+                    <TextBlock Text="{x:Bind DreamName}" Style="{StaticResource BaseTextBlockStyle}"/>
+                    <TextBlock Text="{x:Bind TatgetDate}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="300" Style="{StaticResource BodyTextBlockStyle}"/>
+                </StackPanel>--><!--
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ZoomedInGroupHeaderTemplate" x:DataType="data:Dream">
+            <TextBlock Text="{x:Bind Title}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ZoomedOutTemplate" x:DataType="data:Dream">
+            <TextBlock Text="{x:Bind Group.(data:ControlInfoDataGroup.Title)}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap"/>
+        </DataTemplate>
+
+        <SemanticZoom x:Name="Control1" Height="500">
+            <SemanticZoom.ZoomedInView>
+                <GridView ItemsSource="{x:Bind cvsGroups.View}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" SelectionMode="None" 
+                    ItemTemplate="{StaticResource ZoomedInTemplate}">
+                    <GridView.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource ZoomedInGroupHeaderTemplate}" />
+                    </GridView.GroupStyle>
+                </GridView>
+            </SemanticZoom.ZoomedInView>
+
+            <SemanticZoom.ZoomedOutView>
+                <ListView ItemsSource="{x:Bind cvsGroups.View.CollectionGroups}" SelectionMode="None" ItemTemplate="{StaticResource ZoomedOutTemplate}" />
+            </SemanticZoom.ZoomedOutView>
+        </SemanticZoom>-->
+
+        <!-- When using x:Bind, you need to set x:DataType -->
+        
+        
+        <DataTemplate x:Name="DreamListViewTemplate" x:DataType="data:Dream">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--<TextBlock Grid.Column="1"
+                           Text="{x:Bind DreamName}" 
+                           x:Phase="1"  
+                           Style="{ThemeResource TitleTextBlockStyle}"
+                           Margin="12,6,0,0"/>
+                <Image Source="{x:Bind Photo}"
+                               MaxWidth="400"
+                               MaxHeight="100"   
+                               Stretch="Uniform"
+                               Margin="0,0,0,24" />-->
+                <RelativePanel>
+                    <TextBlock x:Name="IdLabel"
+                                   Margin="0,12,5,12" 
+                                   Style="{ThemeResource SubtitleTextBlockStyle}"
+                                   Text="{x:Bind DreamName}"/>
+                    <TextBlock  Text="{x:Bind TatgetDate}" 
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Foreground="{ThemeResource SystemBaseMediumColor}"
+                            Margin="0,38,5,12"/>
+                    <Image RelativePanel.Below="IdLabel"
+                                   Source="{x:Bind ImageUrl}" 
+                                   MaxWidth="300"
+                                   Stretch="Uniform"
+                                   Margin="0,15,0,24" />
+                </RelativePanel>
+                <!--<TextBlock  Grid.Column="1"
+                            Grid.Row="2"
+                            Text="{x:Bind Details}" 
+                            x:Phase="2"
+                            Style="{ThemeResource BodyTextBlockStyle}"/>-->
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="PageSizeStatesGroup"
+                              CurrentStateChanged="OnCurrentStateChanged">
+
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"  />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterListView.Visibility" Value="Visible" />
+                        <Setter Target="DetailContentPresenter.Visibility" Value="Visible" />
+                        <Setter Target="MasterColumn.Width" Value="320" />
+                        <Setter Target="DetailColumn.Width" Value="*"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"  />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MasterListView.Visibility" Value="Visible" />
+                        <Setter Target="DetailContentPresenter.Visibility" Value="Collapsed" />
+                        <Setter Target="MasterColumn.Width" Value="*" />
+                        <Setter Target="DetailColumn.Width" Value="0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="MasterDetailsStatesGroup">
+
+                <VisualState x:Name="MasterState">
+                    <VisualState.Setters>
+                        <Setter Target="MasterListView.SelectionMode" Value="None" />
+                        <Setter Target="MasterListView.IsItemClickEnabled" Value="True" />
+                        <!--#region App Bar Commands-->
+                        <Setter Target="SelectItmesBtn.Visibility" Value="Visible" />
+                        <Setter Target="AddItemBtn.Visibility" Value="Visible" />
+                        <!--<Setter Target="SearchBtn.Visibility" Value="Visible" />-->
+                        <Setter Target="DeleteItemBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="DeleteItemsBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="CancelSelectionBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="EditItemBtn.Visibility" Value="Collapsed" />
+                        <!--<Setter Target="ImportItemBtn.Visibility" Value="Visible" />-->
+                        <!--#endregion-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MasterStateReset">
+                    <VisualState.Setters>
+                        <Setter Target="MasterListView.SelectionMode" Value="None"/>
+                        <Setter Target="MasterListView.IsItemClickEnabled" Value="True" />
+                        <!--#region App Bar Commands-->
+                        <Setter Target="SelectItmesBtn.Visibility" Value="Visible" />
+                        <Setter Target="AddItemBtn.Visibility" Value="Visible" />
+                        <!--<Setter Target="SearchBtn.Visibility" Value="Visible" />-->
+                        <Setter Target="DeleteItemBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="DeleteItemsBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="CancelSelectionBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="EditItemBtn.Visibility" Value="Collapsed" />
+                        <!--<Setter Target="ImportItemBtn.Visibility" Value="Visible" />-->
+                        <!--#endregion-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MasterDetailsState">
+                    <VisualState.Setters>
+                        <Setter Target="MasterListView.SelectionMode" Value="Extended" />
+                        <Setter Target="MasterListView.IsItemClickEnabled" Value="False" />
+                        <!--#region App Bar Commands-->
+                        <Setter Target="SelectItmesBtn.Visibility" Value="Visible" />
+                        <Setter Target="AddItemBtn.Visibility" Value="Visible" />
+                        <Setter Target="DeleteItemBtn.Visibility" Value="Visible" />
+                        <Setter Target="DeleteItemsBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="CancelSelectionBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="EditItemBtn.Visibility" Value="Collapsed" />
+                        <!--<Setter Target="ImportItemBtn.Visibility" Value="Visible" />-->
+                        <!--#endregion-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ExtendedSelectionState">
+                    <VisualState.Setters>
+                        <!--#region App Bar Commands-->
+                        <Setter Target="SelectItmesBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="AddItemBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="DeleteItemBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="DeleteItemsBtn.Visibility" Value="Visible" />
+                        <!--<Setter Target="SearchBtn.Visibility" Value="Collapsed" />-->
+                        <Setter Target="CancelSelectionBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="EditItemBtn.Visibility" Value="Visible" />
+                        <!--<Setter Target="ImportItemBtn.Visibility" Value="Collapsed" />-->
+                        <!--#endregion-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MultipleSelectionState">
+                    <VisualState.Setters>
+                        <Setter Target="MasterListView.SelectionMode" Value="Multiple" />
+                        <Setter Target="MasterListView.IsItemClickEnabled" Value="False" />
+                        <!--#region App Bar Commands-->
+                        <Setter Target="SelectItmesBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="AddItemBtn.Visibility" Value="Collapsed" />
+                        <Setter Target="DeleteItemBtn.Visibility" Value="Collapsed" />
+                        <!--<Setter Target="SearchBtn.Visibility" Value="Collapsed" />-->
+                        <Setter Target="DeleteItemsBtn.Visibility" Value="Visible" />
+                        <Setter Target="CancelSelectionBtn.Visibility" Value="Visible" />
+                        <Setter Target="EditItemBtn.Visibility" Value="Collapsed" />
+                        <!--<Setter Target="ImportItemBtn.Visibility" Value="Collapsed" />-->
+                        <!--#endregion-->
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <!--#region Navigation across the samples -->
+        <!--Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
+                    VerticalAlignment="Center"
+                    Click="ShowSliptView"/-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Dream List"
+                VerticalAlignment="Top"
+                Style="{ThemeResource TitleTextBlockStyle}"
+                Margin="12" />
+        </StackPanel>
+        <!--#endregion-->
+
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              Grid.Row="1"
+              Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="MasterColumn" Width="320"  />
+                <ColumnDefinition x:Name="DetailColumn" Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                <TextBlock Text="Contacts" Margin="24,8,8,8"
+                           Style="{ThemeResource TitleTextBlockStyle}" />
+            </-->
+            <!--<TextBlock Grid.Row="2"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Text="Welcome to the world of My Dreams"
+                            Margin="12,0,0,12"/>-->
+            <ListView x:Name="MasterListView" 
+                  SelectionMode="Extended"
+                  SelectionChanged="OnSelectionChanged"
+                  IsItemClickEnabled="True"
+                  ShowsScrollingPlaceholders="False"
+                  ItemTemplate="{StaticResource DreamListViewTemplate }"
+                  ItemClick="OnItemClick"
+                  Grid.Row="3">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+
+            <ContentPresenter
+                x:Name="DetailContentPresenter"
+                Grid.Column="1"
+                Grid.RowSpan="2"
+                BorderThickness="1,0,0,0"
+                Padding="24,0"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate x:DataType="data:Dream">
+                        <StackPanel>
+                            <TextBlock Margin="0,9" 
+                                   Style="{ThemeResource TitleTextBlockStyle}"
+                                   Text="{x:Bind DreamName}" />
+                            <!--<Image RelativePanel.Below="IdLabel"
+                               Source="{x:Bind Photo}"
+                               MaxWidth="500"
+                               Stretch="Uniform"
+                               Margin="0,0,0,24" />-->
+                            <Image Source="Assets/placeholder.jpg"
+                               MaxWidth="150"
+                               MaxHeight="100"
+                               Stretch="Uniform"
+                               Margin="0,0,0,24" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                            <!--<TextBlock Style="{ThemeResource TitleTextBlockStyle}"
+                                   Margin="0,8"       
+                                   Text="{x:Bind Name}"/>-->
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}"
+                                   Margin="0,9" 
+                                   Text="{x:Bind Details}" />
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,9" 
+                                   Text="{x:Bind Category}" />
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,9" 
+                                   Text="{x:Bind TatgetDate}" />
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,9" 
+                                   Text="{x:Bind Achieved}" />
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,9" 
+                                   TextWrapping="WrapWholeWords"
+                                   Text="{x:Bind Remark}" />
+                        </StackPanel>
+
+                        <!--<StackPanel Padding="24,0" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <TextBlock Grid.Column="1" x:Name="DreamName"
+                           Text="{x:Bind DreamName}"
+                           TextWrapping="WrapWholeWords"
+                           HorizontalAlignment="Stretch"
+                           Style="{ThemeResource TitleTextBlockStyle}"
+                           Margin="0,6,0,0"/>
+                            <Image Source="{x:Bind Photo}"
+                               MaxWidth="500"
+                               MaxHeight="300"   
+                               Stretch="Uniform"
+                               Margin="0,5,0,24" />
+                            <RelativePanel>
+                                <TextBlock x:Name="category"
+					Margin="0,9" 
+					Style="{ThemeResource BodyTextBlockStyle}"
+					Text="Category : "/>
+                                <TextBlock RelativePanel.RightOf="category" x:Name="CategoryTextBlock"
+					Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,9" 
+                                   Text="{x:Bind Category}" />
+                            </RelativePanel>
+                            <RelativePanel>
+                                <TextBlock x:Name="Details"
+					Margin="0,9" 
+					Style="{ThemeResource BodyTextBlockStyle}"
+					Text="Details : "/>
+                                <TextBlock RelativePanel.RightOf="Details" x:Name="DetailsTextBlock"
+					 Style="{ThemeResource BodyTextBlockStyle}"
+                                   Margin="0,9" 
+                                   Text="{x:Bind Details}" />
+                            </RelativePanel>
+                            <RelativePanel>
+                                <TextBlock x:Name="TatgetDate"
+					Margin="0,9" 
+					Style="{ThemeResource BodyTextBlockStyle}"
+					Text="Tatget Date : "/>
+                                <TextBlock RelativePanel.RightOf="TatgetDate" x:Name="TatgetDateTextBlock"
+					 Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,9" 
+                                   Text="{x:Bind TatgetDate}" />
+                            </RelativePanel>
+                            <RelativePanel>
+                                <ToggleSwitch x:Name="DreamAchieved"
+                                  Header="Dream Achievement Status :"
+                                  OffContent="Not Achieved Yet"
+                                  OnContent="Achieved"
+                                  Margin="0,9" 
+                                  IsOn="{x:Bind Achieved}" Toggled="OnChecked"/>
+                                --><!--<CheckBox x:Name="DreamAchieved" Content="Achieved"                               
+                                  Checked="OnChecked" IsChecked="{x:Bind Achieved}"
+                                  Margin="0,9"/>-->
+                                <!--<ToggleButton x:Name="DreamAchieved" Content="Achieved"                               
+                                  Checked="OnChecked"
+                                  Margin="0,9"/>--><!--
+                            </RelativePanel>
+                            <RelativePanel>
+                                <TextBlock x:Name="Remark"
+					Margin="0,9" 
+					Style="{ThemeResource BodyTextBlockStyle}"
+					Text="Remark : "/>
+                                <TextBlock RelativePanel.RightOf="Remark" x:Name="RemarkTextBlock"
+					 Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,9" 
+                                   TextWrapping="WrapWholeWords"
+                                   Text="{x:Bind Remark}" />
+                            </RelativePanel>
+                        </StackPanel>-->
+                    </DataTemplate>
+                </ContentPresenter.ContentTemplate>
+                <ContentPresenter.ContentTransitions>
+                    <TransitionCollection/>
+                </ContentPresenter.ContentTransitions>
+            </ContentPresenter>
+        </Grid>
+        <!--<local:SamplesPane x:Name="MySamplesPane" Grid.ColumnSpan="2" Grid.RowSpan="2"/>-->
+    </Grid>
+</Page>
