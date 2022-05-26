@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="17B35a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CallLog" representedClassName="CallLog" codeGenerationType="class">
+        <attribute name="callProspectName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="callRemark" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="callTime" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <attribute name="callType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <entity name="Contact" representedClassName="Contact" syncable="YES" codeGenerationType="class">
+        <attribute name="contactDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="contactInfoDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="contactInviteDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="contactLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Dream" representedClassName="Dream" syncable="YES" codeGenerationType="class">
+        <attribute name="dreamAchieved" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="dreamDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dreamDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dreamImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="dreamName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dreamType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="TeamMember" representedClassName="TeamMember" syncable="YES" codeGenerationType="class">
+        <attribute name="teamMemberID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teamMemberIsActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="teamMemberIsDR" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="teamMemberKYC" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="teamMemberName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teamMemberPassword1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teamMemberPassword2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teamMemberSecurityInfo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teamMemberTicketSize" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CallLog" positionX="261" positionY="189" width="128" height="105"/>
+        <element name="Contact" positionX="261" positionY="198" width="128" height="180"/>
+        <element name="Dream" positionX="288" positionY="216" width="128" height="135"/>
+        <element name="TeamMember" positionX="270" positionY="207" width="128" height="180"/>
+    </elements>
+</model>

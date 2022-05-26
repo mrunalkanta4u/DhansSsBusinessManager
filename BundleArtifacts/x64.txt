@@ -1,1 +1,0 @@
-MainPackage=D:\MRUNAL\DhansSsBusinessManager\bin\x64\Debug\DhansSsBusinessManager_1.0.5.0_x64_Debug.appx
